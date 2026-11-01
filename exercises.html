@@ -1,1 +1,155 @@
-<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Thư viện bài tập | DISCI</title><link rel="stylesheet" href="assets/style.css"></head><body><header class="top"><a class="brand" href="index.html">DISCI<span>.</span></a><button class="menu" id="menuBtn">☰</button><nav id="nav"><a href="index.html">Trang chủ</a><a href="health.html">Sức khỏe</a><a href="workout.html">Luyện tập</a><a href="exercises.html">Bài tập</a><a href="progress.html">Tiến độ</a><a href="nutrition.html">Dinh dưỡng</a><a href="shop.html">Cửa hàng</a><a href="cart.html">Giỏ hàng</a><a href="community.html">Cộng đồng</a><a href="ai.html">AI hỏi đáp</a><a href="notifications.html">Thông báo</a><a href="account.html">Tài khoản</a><a href="vip.html">VIP</a></nav><div id="authArea"><a class="btn line" href="account.html">Tài khoản</a></div></header><main class="wrap"><div class="row"><div><span class="eyebrow dark">DISCI EXERCISE LIBRARY</span><h1>Thư viện bài tập</h1><p class="muted">Tìm bài tập theo nhóm cơ, dụng cụ và mức độ. Chọn bài phù hợp với không gian và thể trạng.</p></div><a class="btn soft" href="ai.html">✦ Hỏi AI chọn bài tập</a></div><section class="card exercise-toolbar"><input id="exerciseSearch" placeholder="⌕  Tìm theo tên bài tập hoặc nhóm cơ (ngực, đùi, lưng, tay, cơ lõi)..."><div class="row"><div class="filter-pills" id="categoryFilters"><button class="filter-pill active" data-category="">Tất cả</button><button class="filter-pill" data-category="Trọng lượng cơ thể">Trọng lượng cơ thể</button><button class="filter-pill" data-category="Dây kháng lực">Dây kháng lực</button><button class="filter-pill" data-category="Cardio & Đi bộ">Cardio & Đi bộ</button><button class="filter-pill" data-category="Phục hồi & Cơ lõi">Phục hồi & Cơ lõi</button></div><div class="filter-pills"><button class="filter-pill" id="quietToggle">☾ Chỉ bài êm phòng trọ</button><button class="filter-pill" id="jointToggle">♧ Ít va đập (Khớp an toàn)</button></div></div><div class="row"><select id="level"><option value="">Mọi cấp độ</option><option>Cơ bản</option><option>Trung bình</option><option>Nâng cao</option></select><select id="equipmentFilter"><option value="">Mọi dụng cụ</option><option>Không cần dụng cụ</option><option>chair</option><option>mat</option><option>Dây kháng lực</option><option>Tạ</option></select><span class="muted" id="exerciseCount"></span></div></section><div id="exerciseGrid" class="cards exercise-grid mt"></div></main><footer>© 2026 DISCI · Thư viện bài tập tại nhà.</footer><script src="assets/app.js"></script></body></html>
+
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Thư viện bài tập | DISCI</title>
+
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body>
+
+    <header class="top">
+
+        <a class="brand" href="index.html">
+            DISCI<span>.</span>
+        </a>
+
+        <button class="menu" id="menuBtn">☰</button>
+
+        <nav id="nav">
+            <a href="index.html">Trang chủ</a>
+            <a href="health.html">Sức khỏe</a>
+            <a href="workout.html">Luyện tập</a>
+            <a href="exercises.html">Bài tập</a>
+            <a href="progress.html">Tiến độ</a>
+            <a href="nutrition.html">Dinh dưỡng</a>
+            <a href="shop.html">Cửa hàng</a>
+            <a href="cart.html">Giỏ hàng</a>
+            <a href="community.html">Cộng đồng</a>
+            <a href="ai.html">AI hỏi đáp</a>
+            <a href="notifications.html">Thông báo</a>
+            <a href="account.html">Tài khoản</a>
+            <a href="vip.html">VIP</a>
+        </nav>
+
+        <div id="authArea">
+            <a class="btn line" href="account.html">Tài khoản</a>
+        </div>
+
+    </header>
+
+    <main class="wrap">
+
+        <div class="row">
+
+            <div>
+                <span class="eyebrow dark">
+                    DISCI EXERCISE LIBRARY
+                </span>
+
+                <h1>Thư viện bài tập</h1>
+
+                <p class="muted">
+                    Tìm bài tập theo nhóm cơ, dụng cụ và mức độ.
+                    Chọn bài phù hợp với không gian và thể trạng.
+                </p>
+            </div>
+
+            <a class="btn soft" href="ai.html">
+                ✦ Hỏi AI chọn bài tập
+            </a>
+
+        </div>
+
+        <section class="card exercise-toolbar">
+
+            <input
+                id="exerciseSearch"
+                placeholder="⌕ Tìm theo tên bài tập hoặc nhóm cơ (ngực, đùi, lưng, tay, cơ lõi)..."
+            >
+
+            <div class="row">
+
+                <div class="filter-pills" id="categoryFilters">
+
+                    <button class="filter-pill active" data-category="">
+                        Tất cả
+                    </button>
+
+                    <button class="filter-pill" data-category="Trọng lượng cơ thể">
+                        Trọng lượng cơ thể
+                    </button>
+
+                    <button class="filter-pill" data-category="Dây kháng lực">
+                        Dây kháng lực
+                    </button>
+
+                    <button class="filter-pill" data-category="Cardio & Đi bộ">
+                        Cardio & Đi bộ
+                    </button>
+
+                    <button class="filter-pill" data-category="Phục hồi & Cơ lõi">
+                        Phục hồi & Cơ lõi
+                    </button>
+
+                </div>
+
+                <div class="filter-pills">
+
+                    <button class="filter-pill" id="quietToggle">
+                        ☾ bài tập nhẹ nhàng
+                    </button>
+
+                    <button class="filter-pill" id="jointToggle">
+                        ♧ an toàn
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <select id="level">
+
+                    <option value="">Mọi cấp độ</option>
+                    <option>Cơ bản</option>
+                    <option>Trung bình</option>
+                    <option>Nâng cao</option>
+
+                </select>
+
+                <select id="equipmentFilter">
+
+                    <option value="">Mọi dụng cụ</option>
+                    <option>Không cần dụng cụ</option>
+                    <option>chair</option>
+                    <option>mat</option>
+                    <option>Dây kháng lực</option>
+                    <option>Tạ</option>
+
+                </select>
+
+                <span class="muted" id="exerciseCount"></span>
+
+            </div>
+
+        </section>
+
+        <div id="exerciseGrid" class="cards exercise-grid mt"></div>
+
+    </main>
+
+    <footer>
+        © 2026 DISCI · Thư viện bài tập tại nhà.
+    </footer>
+
+    <script src="assets/app.js"></script>
+
+</body>
+</html>

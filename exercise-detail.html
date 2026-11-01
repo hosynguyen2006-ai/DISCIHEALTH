@@ -1,1 +1,95 @@
-<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Chi tiết bài tập | DISCI</title><link rel="stylesheet" href="assets/style.css"></head><body><header class="top"><a class="brand" href="index.html">DISCI<span>.</span></a><button class="menu" id="menuBtn">☰</button><nav id="nav"><a href="index.html">Trang chủ</a><a href="health.html">Sức khỏe</a><a href="workout.html">Luyện tập</a><a href="exercises.html">Bài tập</a><a href="progress.html">Tiến độ</a><a href="nutrition.html">Dinh dưỡng</a><a href="shop.html">Cửa hàng</a><a href="cart.html">Giỏ hàng</a><a href="community.html">Cộng đồng</a><a href="ai.html">AI hỏi đáp</a><a href="notifications.html">Thông báo</a><a href="account.html">Tài khoản</a><a href="vip.html">VIP</a></nav><div id="authArea"><a class="btn line" href="account.html">Tài khoản</a></div></header><main class="wrap"><a href="exercises.html">← Quay lại thư viện</a><article class="card"><span class="eyebrow dark">EXERCISE GUIDE</span><h1 id="detailName">Hướng dẫn bài tập</h1><p id="detailTarget"></p><h2>Cách thực hiện</h2><ol id="detailSteps"></ol><h3>Lỗi thường gặp và cách sửa</h3><p id="detailMistakes" class="notice"></p><p id="detailDose"></p><h2>Video hướng dẫn</h2><div class="videoFrame" id="videoFrame">Video hướng dẫn sẽ hiển thị tại đây.</div><div id="videoLock" class="notice" hidden>Video này dành cho thành viên VIP. <a href="vip.html">Mở khóa VIP</a></div></article><article class="card mt"><span class="vipTag">TÍNH NĂNG VIP</span><h2>Điều chỉnh tư thế bằng camera</h2><p>Đặt camera sao cho thấy toàn thân, đủ ánh sáng và thực hiện động tác theo hướng dẫn.</p><video id="poseVideo" autoplay playsinline muted></video><div class="row"><button class="btn primary" id="startCamera">Bật camera và phân tích</button><button class="btn line" id="stopCamera">Tắt camera</button></div><p id="poseStatus" class="notice">Camera sẽ phân tích các điểm khớp và đưa ra gợi ý tư thế trong bài tập này.</p><p class="tiny">Cần HTTPS, quyền camera và kết nối Internet. Kết quả chỉ hỗ trợ luyện tập, không thay thế đánh giá của huấn luyện viên hoặc chuyên gia y tế.</p></article></main><footer>© 2026 DISCI · Nền tảng luyện tập và chăm sóc sức khỏe.</footer><script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core"></script><script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter"></script><script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl"></script><script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection"></script><script src="assets/app.js"></script></body></html>
+
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Chi tiết bài tập | DISCI</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <header class="top">
+        <a class="brand" href="index.html">DISCI<span>.</span></a>
+        <button class="menu" id="menuBtn">☰</button>
+        <nav id="nav">
+            <a href="index.html">Trang chủ</a>
+            <a href="health.html">Sức khỏe</a>
+            <a href="workout.html">Luyện tập</a>
+            <a href="exercises.html">Bài tập</a>
+            <a href="progress.html">Tiến độ</a>
+            <a href="nutrition.html">Dinh dưỡng</a>
+            <a href="shop.html">Cửa hàng</a>
+            <a href="cart.html">Giỏ hàng</a>
+            <a href="community.html">Cộng đồng</a>
+            <a href="ai.html">AI hỏi đáp</a>
+            <a href="notifications.html">Thông báo</a>
+            <a href="account.html">Tài khoản</a>
+            <a href="vip.html">VIP</a>
+        </nav>
+        <div id="authArea">
+            <a class="btn line" href="account.html">Tài khoản</a>
+        </div>
+    </header>
+
+    <main class="wrap">
+        <a href="exercises.html">← Quay lại thư viện</a>
+
+        <article class="card">
+            <span class="eyebrow dark">EXERCISE GUIDE</span>
+            <h1 id="detailName">Hướng dẫn bài tập</h1>
+            <p id="detailTarget"></p>
+
+            <h2>Cách thực hiện</h2>
+            <ol id="detailSteps"></ol>
+
+            <h3>Lỗi thường gặp và cách sửa</h3>
+            <p id="detailMistakes" class="notice"></p>
+
+            <p id="detailDose"></p>
+
+            <section class="exercise-video">
+            <h2>Video hướng dẫn bài tập</h2>
+
+            <video controls playsinline preload="metadata">
+          <source src="Videos/squad.mp4" type="video/mp4">
+              Trình duyệt của bạn không hỗ trợ video.
+             </video>
+           </section>
+
+            <div id="videoLock" class="notice" hidden>
+                Video này dành cho thành viên VIP.
+                <a href="vip.html">Mở khóa VIP</a>
+            </div>
+        </article>
+
+        <article class="card mt">
+            <span class="vipTag">TÍNH NĂNG VIP</span>
+            <h2>Điều chỉnh tư thế bằng camera</h2>
+            <p>Đặt camera sao cho thấy toàn thân, đủ ánh sáng và thực hiện động tác theo hướng dẫn.</p>
+
+            <video id="poseVideo" autoplay playsinline muted></video>
+
+            <div class="row">
+                <button class="btn primary" id="startCamera">Bật camera và phân tích</button>
+                <button class="btn line" id="stopCamera">Tắt camera</button>
+            </div>
+
+            <p id="poseStatus" class="notice">
+                Camera sẽ phân tích các điểm khớp và đưa ra gợi ý tư thế trong bài tập này.
+            </p>
+
+            <p class="tiny">
+                Cần HTTPS, quyền camera và kết nối Internet. Kết quả chỉ hỗ trợ luyện tập, không thay thế đánh giá của huấn luyện viên hoặc chuyên gia y tế.
+            </p>
+        </article>
+    </main>
+
+    <footer>© 2026 DISCI · Nền tảng luyện tập và chăm sóc sức khỏe.</footer>
+
+    <script src="[https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core](https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core)"></script>
+    <script src="[https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter](https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter)"></script>
+    <script src="[https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl](https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl)"></script>
+    <script src="[https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection](https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection)"></script>
+    <script src="assets/app.js"></script>
+</body>
+</html>

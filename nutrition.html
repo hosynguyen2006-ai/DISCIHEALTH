@@ -1,1 +1,151 @@
-<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dinh dưỡng | DISCI</title><link rel="stylesheet" href="assets/style.css"></head><body><header class="top"><a class="brand" href="index.html">DISCI<span>.</span></a><button class="menu" id="menuBtn">☰</button><nav id="nav"><a href="index.html">Trang chủ</a><a href="health.html">Sức khỏe</a><a href="workout.html">Luyện tập</a><a href="exercises.html">Bài tập</a><a href="progress.html">Tiến độ</a><a href="nutrition.html">Dinh dưỡng</a><a href="shop.html">Cửa hàng</a><a href="cart.html">Giỏ hàng</a><a href="community.html">Cộng đồng</a><a href="ai.html">AI hỏi đáp</a><a href="notifications.html">Thông báo</a><a href="account.html">Tài khoản</a><a href="vip.html">VIP</a></nav><div id="authArea"><a class="btn line" href="account.html">Tài khoản</a></div></header><main class="wrap"><h1>Dinh dưỡng mỗi ngày</h1><div class="cols"><article class="card"><h2>Tính calo</h2><form id="foodForm"><label>Tên thực phẩm<input id="foodName" required></label><label>Năng lượng (kcal)<input id="foodKcal" type="number" min="0" required></label><button class="btn primary">Thêm thực phẩm</button></form><h3>Tổng calo hôm nay: <span id="dailyCalories">0 kcal</span></h3><div id="foodList"></div></article><article class="card"><h2>Thực đơn tham khảo</h2><div class="meal"><b>Bữa sáng</b><p>Yến mạch, sữa chua và trái cây · khoảng 350 kcal</p></div><div class="meal"><b>Bữa trưa</b><p>Cơm, thịt nạc hoặc đậu phụ, rau xanh · khoảng 550 kcal</p></div><div class="meal"><b>Bữa tối</b><p>Cá hoặc đậu, khoai và rau củ · khoảng 450 kcal</p></div></article></div><article class="card mt"><h2>Sản phẩm hỗ trợ mục tiêu tăng cơ</h2><p>Tham khảo danh mục protein và dinh dưỡng thể thao. Kiểm tra thành phần, nguồn gốc, dị ứng và tham khảo chuyên gia trước khi sử dụng.</p><a class="btn soft" href="shop.html">Xem sản phẩm</a></article></main><footer>© 2026 DISCI · Nền tảng luyện tập và chăm sóc sức khỏe.</footer><script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core"></script><script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter"></script><script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl"></script><script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection"></script><script src="assets/app.js"></script></body></html>
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Dinh dưỡng | DISCI</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    :root{--nutri-green:#16845b;--nutri-dark:#153c31;--nutri-soft:#eff8f2;--nutri-text:#20332c}
+    body{background:#f6f8f5;color:var(--nutri-text)}
+    .nutrition-page{max-width:1180px;margin:34px auto 72px;padding:0 22px}
+    .nutrition-hero{position:relative;overflow:hidden;min-height:330px;border-radius:28px;background:linear-gradient(90deg,rgba(9,40,29,.88),rgba(9,40,29,.45)),url('https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=1800&q=85') center/cover;display:flex;align-items:center;padding:48px;color:white;box-shadow:0 18px 50px #173e2b20}
+    .nutrition-hero-content{max-width:620px}.nutrition-kicker{font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#b8f0ce}
+    .nutrition-hero h1{font-size:clamp(34px,5vw,54px);line-height:1.08;margin:13px 0 16px;color:#fff}
+    .nutrition-hero p{font-size:16px;line-height:1.75;color:#e8f3ec;margin:0;max-width:560px}
+    .nutrition-tag{display:inline-flex;margin-top:24px;padding:10px 16px;border:1px solid #ffffff65;border-radius:99px;background:#ffffff16;font-size:13px;font-weight:700}
+    .nutrition-section{margin-top:38px}.nutrition-heading{display:flex;justify-content:space-between;align-items:end;gap:18px;margin-bottom:18px}
+    .nutrition-heading h2{font-size:26px;color:var(--nutri-dark);margin:0 0 6px}.nutrition-heading p{margin:0;color:#718078;font-size:14px}
+    .calorie-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .calorie-card{background:#fff;border:1px solid #e6eee8;border-radius:20px;padding:22px;box-shadow:0 8px 28px #183d2a08}
+    .calorie-card .calorie-label{font-size:13px;font-weight:800;color:#6b7b72;text-transform:uppercase;letter-spacing:.7px}
+    .calorie-number{font-size:34px;font-weight:850;color:var(--nutri-green);margin:9px 0 4px}.calorie-card p{font-size:13px;color:#738078;line-height:1.6;margin:0}
+    .calorie-card.featured{background:var(--nutri-dark);border-color:var(--nutri-dark)}.calorie-card.featured .calorie-label,.calorie-card.featured p{color:#d0e5d8}.calorie-card.featured .calorie-number{color:#a9edc5}
+    .nutrition-note{font-size:12px;line-height:1.6;color:#78857d;margin-top:12px}
+    .meal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .meal-card{overflow:hidden;background:#fff;border:1px solid #e7eee8;border-radius:20px;box-shadow:0 8px 28px #183d2a08}
+    .meal-card img{width:100%;height:190px;object-fit:cover;display:block}.meal-content{padding:18px}
+    .meal-top{display:flex;justify-content:space-between;gap:10px;align-items:center}.meal-top h3{margin:0;color:var(--nutri-dark);font-size:18px}
+    .meal-kcal{white-space:nowrap;border-radius:99px;padding:6px 10px;background:var(--nutri-soft);color:var(--nutri-green);font-size:12px;font-weight:800}
+    .meal-content p{font-size:14px;line-height:1.65;color:#68766e;margin:12px 0 0}
+    .nutrition-tools{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:38px}
+    .nutrition-panel{background:#fff;border:1px solid #e6eee8;border-radius:22px;padding:24px;box-shadow:0 8px 28px #183d2a08}
+    .nutrition-panel h2{font-size:21px;color:var(--nutri-dark);margin:0 0 8px}.nutrition-panel .sub{font-size:13px;color:#78857d;line-height:1.6;margin:0 0 18px}
+    #foodForm{display:grid;gap:12px}#foodForm label{display:grid;gap:7px;font-size:13px;font-weight:700;color:#52645a}
+    #foodForm input{width:100%;box-sizing:border-box;border:1px solid #dce7df;border-radius:12px;padding:12px 13px;font:inherit;background:#fbfdfb;color:#20332c}
+    #foodForm input:focus{outline:2px solid #9bd9b6;border-color:var(--nutri-green)}
+    .nutrition-submit{border:0;border-radius:12px;padding:13px 16px;background:var(--nutri-green);color:#fff;font-weight:800;cursor:pointer}
+    .nutrition-submit:hover{background:#116d4b}
+    .calorie-total{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding:15px;border-radius:14px;background:var(--nutri-soft);color:var(--nutri-dark);font-weight:750}
+    #dailyCalories{font-size:20px;color:var(--nutri-green)}#foodList{margin-top:12px;max-height:190px;overflow:auto}
+    #foodList p{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #edf1ed;padding:9px 2px;margin:0;font-size:13px;color:#52645a}
+    .portion-list{display:grid;gap:12px}.portion-row{display:flex;gap:12px;align-items:center;padding:12px;border-radius:14px;background:#f7faf7}
+    .portion-icon{width:38px;height:38px;display:grid;place-items:center;border-radius:12px;background:#e5f4e9;font-size:19px}
+    .portion-row strong{display:block;font-size:13px;color:var(--nutri-dark)}.portion-row span{display:block;font-size:12px;color:#77847c;margin-top:3px}
+    .nutrition-shop{margin-top:28px;padding:25px 28px;border-radius:20px;background:linear-gradient(110deg,#e9f6ed,#f8fbf7);display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .nutrition-shop h2{font-size:20px;color:var(--nutri-dark);margin:0 0 7px}.nutrition-shop p{font-size:13px;color:#68776e;margin:0;line-height:1.6}
+    .nutrition-shop a{white-space:nowrap;text-decoration:none;background:var(--nutri-green);color:white;padding:12px 17px;border-radius:12px;font-weight:800;font-size:13px}
+    @media(max-width:800px){.calorie-grid,.meal-grid{grid-template-columns:1fr 1fr}.nutrition-tools{grid-template-columns:1fr}.nutrition-hero{padding:34px 26px;min-height:300px}}
+    @media(max-width:540px){.calorie-grid,.meal-grid{grid-template-columns:1fr}.nutrition-heading{display:block}.nutrition-hero{padding:28px 22px}.nutrition-shop{align-items:flex-start;flex-direction:column}}
+  </style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html">DISCI<span>.</span></a>
+  <button class="menu" id="menuBtn">☰</button>
+  <nav id="nav">
+    <a href="index.html">Trang chủ</a><a href="health.html">Sức khỏe</a><a href="workout.html">Luyện tập</a><a href="exercises.html">Bài tập</a><a href="progress.html">Tiến độ</a><a href="nutrition.html">Dinh dưỡng</a><a href="shop.html">Cửa hàng</a><a href="cart.html">Giỏ hàng</a><a href="community.html">Cộng đồng</a><a href="ai.html">AI hỏi đáp</a><a href="notifications.html">Thông báo</a><a href="account.html">Tài khoản</a><a href="vip.html">VIP</a>
+  </nav>
+  <div id="authArea"><a class="btn line" href="account.html">Tài khoản</a></div>
+</header>
+
+<main class="nutrition-page">
+  <section class="nutrition-hero">
+    <div class="nutrition-hero-content">
+      <div class="nutrition-kicker">DISCI · EAT WELL, LIVE STRONG</div>
+      <h1>Ăn uống khoa học.<br>Khỏe mạnh mỗi ngày.</h1>
+      <p>Chọn thực phẩm đa dạng, cân bằng khẩu phần và theo dõi năng lượng nạp vào để hỗ trợ mục tiêu vận động của bạn.</p>
+      <span class="nutrition-tag">Dinh dưỡng cân bằng · Lối sống năng động</span>
+    </div>
+  </section>
+
+  <section class="nutrition-section">
+    <div class="nutrition-heading">
+      <div><h2>Mức calo gợi ý mỗi ngày</h2><p>Các mốc tham khảo để bạn hình dung khẩu phần theo mục tiêu.</p></div>
+    </div>
+    <div class="calorie-grid">
+      <article class="calorie-card">
+        <div class="calorie-label">Giảm cân nhẹ</div>
+        <div class="calorie-number">1.500–1.700</div>
+        <p>kcal/ngày · Mốc minh họa cho người có nhu cầu năng lượng thấp hơn.</p>
+      </article>
+      <article class="calorie-card featured">
+        <div class="calorie-label">Duy trì cân nặng</div>
+        <div class="calorie-number">1.800–2.200</div>
+        <p>kcal/ngày · Mốc tham khảo phổ biến, tùy thể trạng và mức vận động.</p>
+      </article>
+      <article class="calorie-card">
+        <div class="calorie-label">Tăng cân / vận động nhiều</div>
+        <div class="calorie-number">2.300–2.600</div>
+        <p>kcal/ngày · Có thể cần nhiều năng lượng hơn khi hoạt động thể lực cao.</p>
+      </article>
+    </div>
+    <p class="nutrition-note">Lưu ý: Đây là khoảng calo minh họa, không phải chỉ định cá nhân. Nhu cầu thực tế phụ thuộc tuổi, giới tính, chiều cao, cân nặng, tình trạng sức khỏe và cường độ vận động. Không nên áp dụng chế độ hạn chế năng lượng quá mức.</p>
+  </section>
+
+  <section class="nutrition-section">
+    <div class="nutrition-heading"><div><h2>Gợi ý thực đơn trong ngày</h2><p>Ưu tiên đủ nhóm chất, rau xanh và nguồn đạm phù hợp.</p></div></div>
+    <div class="meal-grid">
+      <article class="meal-card">
+        <img src="https://images.unsplash.com/photo-1517673132405-a56a62b18caf?auto=format&fit=crop&w=900&q=80" alt="Bữa sáng với yến mạch, sữa chua và trái cây" loading="lazy">
+        <div class="meal-content"><div class="meal-top"><h3>Bữa sáng</h3><span class="meal-kcal">~350 kcal</span></div><p>Yến mạch, sữa chua không đường, chuối hoặc các loại quả mọng và một ít hạt.</p></div>
+      </article>
+      <article class="meal-card">
+        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=900&q=80" alt="Bữa trưa cân bằng với cơm, rau và protein" loading="lazy">
+        <div class="meal-content"><div class="meal-top"><h3>Bữa trưa</h3><span class="meal-kcal">~550 kcal</span></div><p>Cơm vừa khẩu phần, thịt nạc hoặc đậu phụ, rau xanh và một phần trái cây.</p></div>
+      </article>
+      <article class="meal-card">
+        <img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=900&q=80" alt="Bữa tối với cá và rau củ" loading="lazy">
+        <div class="meal-content"><div class="meal-top"><h3>Bữa tối</h3><span class="meal-kcal">~450 kcal</span></div><p>Cá hoặc đậu, khoai lang, rau củ luộc hay hấp; ưu tiên cách chế biến ít dầu.</p></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="nutrition-tools">
+    <article class="nutrition-panel">
+      <h2>Nhật ký calo hôm nay</h2>
+      <p class="sub">Thêm thực phẩm và lượng năng lượng tương ứng để theo dõi tổng calo đã nạp.</p>
+      <form id="foodForm">
+        <label>Tên thực phẩm<input id="foodName" type="text" placeholder="Ví dụ: 1 quả chuối" required></label>
+        <label>Năng lượng (kcal)<input id="foodKcal" type="number" min="0" step="1" placeholder="Ví dụ: 105" required></label>
+        <button class="nutrition-submit" type="submit">+ Thêm vào nhật ký</button>
+      </form>
+      <div class="calorie-total"><span>Tổng calo hôm nay</span><span id="dailyCalories">0 kcal</span></div>
+      <div id="foodList"></div>
+    </article>
+    <article class="nutrition-panel">
+      <h2>Nguyên tắc chia khẩu phần</h2>
+      <p class="sub">Một cách đơn giản để xây dựng bữa ăn cân đối mà không cần cân đo quá phức tạp.</p>
+      <div class="portion-list">
+        <div class="portion-row"><div class="portion-icon">🥬</div><div><strong>½ đĩa: Rau củ và trái cây</strong><span>Bổ sung chất xơ, vitamin và khoáng chất.</span></div></div>
+        <div class="portion-row"><div class="portion-icon">🍗</div><div><strong>¼ đĩa: Thực phẩm giàu đạm</strong><span>Cá, trứng, thịt nạc, sữa hoặc các loại đậu.</span></div></div>
+        <div class="portion-row"><div class="portion-icon">🍚</div><div><strong>¼ đĩa: Tinh bột</strong><span>Cơm, khoai, yến mạch hoặc ngũ cốc nguyên hạt.</span></div></div>
+        <div class="portion-row"><div class="portion-icon">💧</div><div><strong>Uống đủ nước</strong><span>Điều chỉnh lượng nước theo thời tiết và hoạt động.</span></div></div>
+      </div>
+    </article>
+  </section>
+
+  <section class="nutrition-shop">
+    <div><h2>Sản phẩm hỗ trợ mục tiêu tập luyện</h2><p>Khám phá danh mục dinh dưỡng thể thao; luôn kiểm tra thành phần và nguồn gốc trước khi sử dụng.</p></div>
+    <a href="shop.html">Khám phá cửa hàng →</a>
+  </section>
+</main>
+
+<footer>© 2026 DISCI · Nền tảng luyện tập và chăm sóc sức khỏe.</footer>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
